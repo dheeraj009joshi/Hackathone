@@ -29,10 +29,14 @@ router.post('/register',async(req,res)=>{
       } = req.body;
 
       const Username=req.body.Authentication.Username
-      const Password=req.body.Authentication.Username
-      if (User.findOne({ 'Authentication.Username': Username, 'Authentication.Password': Password  })){
-        res.json({"Message":"User Already Exist"})
-      }
+      const Password=req.body.Authentication.Password
+      if (await User.findOne({ 'Authentication.Username': Username, 'Authentication.Password': Password  })){
+        const user= await User.findOne({ 'Authentication.Username': Username, 'Authentication.Password': Password  })
+        res.json({
+          "Message":"User Already Exist",
+          "Details":user
+        })
+      } else{
       
       try {
         const newUser = new User({
@@ -61,6 +65,7 @@ router.post('/register',async(req,res)=>{
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
       }
+    }
     });
             
 
@@ -89,19 +94,19 @@ router.patch('/update/:id', async(req,res)=>{
 
 
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    console.log(username, password)
+    const { Username, Password } = req.body;
+    console.log(Username, Password)
     try {
-      const user = await User.findOne({ 'Authentication.Username': username, 'Authentication.Password': password  });
+      const user = await User.findOne({ 'Authentication.Username': Username, 'Authentication.Password': Password  });
         console.log(user)
       if (!user) {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
   
-      res.status(200).json({ message: 'Login successful' ,"User_details":user});
+      res.status(200).json({ "message": "Login successful" ,"User_details":user});
     } catch (error) {
-        res.send("error falios")
-    //   res.status(500).json({ error: 'Internal server error' });
+        // res.send("error falios")
+      res.status(500).json({ error: 'Internal server error' });
     }
   });
   
