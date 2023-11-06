@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const User = require("./Models/User")
 const mongo_url="mongodb+srv://dlovej009:Dheeraj2006@cluster0.dnu8vna.mongodb.net/My_node_users?retryWrites=true&w=majority"
 
 
@@ -8,6 +9,8 @@ app.use(express.json())
 mongoose.connect(mongo_url ,{useNewUrlParser:true})
 
 const con = mongoose.connection
+
+
 
 
 const UserRoutte= require('./Routes/User')

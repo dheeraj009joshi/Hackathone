@@ -7,32 +7,104 @@ router.get('/',async(req,res)=>{
 })
 
 
-router.post('/',async(req,res)=>{
-    const U = new User({
-        name:req.body.name,
-        Number:req.body.Number
-    })
-    const ui= await U.save()
-    res.json(ui)
+router.post('/register',async(req,res)=>{
+        const {
+        UserID,
+        FirstName,
+        LastName,
+        ProfileImage,
+        CoverImage,
+        Contact,
+        DOB,
+        BusinessName,
+        Position,
+        Designation,
+        Website,
+        Socials,
+        About,
+        Location,
+        Gallery,
+        Payment,
+        Authentication,
+      } = req.body;
 
-})
+      const Username=req.body.Authentication.Username
+      const Password=req.body.Authentication.Username
+      if (User.findOne({ 'Authentication.Username': Username, 'Authentication.Password': Password  })){
+        res.json({"Message":"User Already Exist"})
+      }
+      
+      try {
+        const newUser = new User({
+          UserID,
+          FirstName,
+          LastName,
+          ProfileImage,
+          CoverImage,
+          Contact,
+          DOB,
+          BusinessName,
+          Position,
+          Designation,
+          Website,
+          Socials,
+          About,
+          Location,
+          Gallery,
+          Payment,
+          Authentication,
+        });
+
+        await newUser.save();
+        res.status(201).json({ message: 'User registered successfully' });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    });
+            
+
 
 router.get('/:id',async(req,res)=>{
     const U = await User.findById(req.params.id)
     res.json(U)
-})
+});
 
 
-router.patch('/:id',async(req,res)=>{
+router.patch('/update/:id', async(req,res)=>{
     // const U = await User.findById(req.params.id)
+    try {
     const updated_fields = req.body
+    console.log(updated_fields , req.params.id)
     const update = await User.findByIdAndUpdate(req.params.id, updated_fields,{new:true})
     if (update) {
-        res.json(update);
+        res.send(update);
     } else {
         res.status(404).json({ error: 'User not found' });
+    } 
+} catch (error) {
+    console.log(error)
+}
+});
+
+
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    console.log(username, password)
+    try {
+      const user = await User.findOne({ 'Authentication.Username': username, 'Authentication.Password': password  });
+        console.log(user)
+      if (!user) {
+        return res.status(401).json({ error: 'Invalid credentials' });
+      }
+  
+      res.status(200).json({ message: 'Login successful' ,"User_details":user});
+    } catch (error) {
+        res.send("error falios")
+    //   res.status(500).json({ error: 'Internal server error' });
     }
-})
+  });
+  
 
 
 
