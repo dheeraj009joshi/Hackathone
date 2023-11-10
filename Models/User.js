@@ -67,6 +67,7 @@ const userSchema = new Schema({
   LastName: String,
   ProfileImage: String,
   CoverImage: String,
+  CoverLogo: String,
   Contact: String,
   DOB: String,
   BusinessName: String,
