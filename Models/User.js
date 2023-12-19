@@ -29,7 +29,7 @@ const userSchema = new Schema({
   longitude: String,
   industryId: String,
   phoneNumber: String,
-  registrationId:String,
+  regId:String,
   gender:{
     type:String,
     enum: ['male', 'female', 'other'],

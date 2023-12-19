@@ -1,22 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../Models/User");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+
 
 // User registration route
-router.post("/register", async (req, res) => {
+router.post("/", async (req, res) => {
   function generateCircularCoordinates(
     centerLat,
     centerLng,
-    radius,
-    numPoints
+   
   ) {
     const coordinates2km = [];
     const coordinates3km = [];
 
-    for (let i = 0; i < numPoints; i++) {
-      const angle = (i / numPoints) * 2 * Math.PI;
+    for (let i = 0; i < 5; i++) {
+      const angle = (i / 5) * 2 * Math.PI;
 
       // Calculate coordinates for a circle with a radius of 2 km
       const lat2km = centerLat + (2 / 111) * Math.cos(angle);
@@ -35,8 +33,6 @@ router.post("/register", async (req, res) => {
   const result = generateCircularCoordinates(
     centerLatitude,
     centerLongitude,
-    2,
-    numPoints
   );
   res.json({ coordinates: result });
   try {
