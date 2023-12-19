@@ -142,9 +142,9 @@ router.patch("/update", async (req, res) => {
 
 
   // Validate email
-  if (!validator.isEmail(Email)) {
-    return res.status(400).json({ error: "Invalid email address" });
-  }
+  // if (!validator.isEmail(Email)) {
+  //   return res.status(400).json({ error: "Invalid email address" });
+  // }
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -170,7 +170,7 @@ router.patch("/update", async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-
+    res.json(error)
     // Check if the error is due to validation failure
     if (error.name === 'ValidationError') {
       const validationErrors = Object.values(error.errors).map((err) => err.message);
