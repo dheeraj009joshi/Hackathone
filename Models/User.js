@@ -10,6 +10,7 @@ const userSchema = new Schema({
   },
   email: {
     type: String,
+    required: true,
     lowercase: true,
   },
   password: {
@@ -28,6 +29,10 @@ const userSchema = new Schema({
   longitude: String,
   industryId: String,
   registrationId:String,
+  gender:{
+    type:String,
+    enum: ['male', 'female', 'other'],
+  }
 });
 
 const User = mongoose.model("User", userSchema);

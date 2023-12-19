@@ -133,7 +133,7 @@ router.get("/get/:id", async (req, res) => {
 
 // UPDATE route
 router.patch("/update", async (req, res) => {
-  const { Name, Email, Role, DeviceID, Skills, Latitude, Longitude, IndustryId, RegistrationId,Id } = req.body;
+  const { name, email, role, deviceID, skills, latitude, longitude, industryId, registrationId,Id,gender } = req.body;
 
   // Check if required fields are missing
 
@@ -147,15 +147,7 @@ router.patch("/update", async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       Id,
       {
-        Name,
-        Email,
-        Role,
-        DeviceID,
-        Skills,
-        Latitude,
-        Longitude,
-        IndustryId,
-        RegistrationId,
+        name, email, role, deviceID, skills, latitude, longitude, industryId, registrationId,Id,gender 
       },
       { new: true }
     );
