@@ -4,37 +4,30 @@ const validator = require("validator");
 
 
 const userSchema = new Schema({
-  Name: {
+  name: {
     type: String,
     required: true,
   },
-  Email: {
+  email: {
     type: String,
-    unique: true,
-    required: true,
     lowercase: true,
-    validate: {
-      validator: validator.isEmail,
-      message: "Invalid email address",
-    },
   },
-  Password: {
+  password: {
     type: String,
     required: true,
     minlength: 6,
-    trim: true,
   },
-  Role: {
+  role: {
     type: String,
     enum: ['worker', 'manager', 'user','technician'],
     default: 'user',
     },
-  DeviceID: { type: String, required: true },
-  Skills: [String],
-  Latitude: String,
-  Longitude: String,
-  IndustryId: String,
-  RegistrationId:String,
+  deviceID: { type: String, required: true },
+  skills: [String],
+  latitude: String,
+  longitude: String,
+  industryId: String,
+  registrationId:String,
 });
 
 const User = mongoose.model("User", userSchema);

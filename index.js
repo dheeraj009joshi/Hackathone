@@ -3,7 +3,7 @@ const cors = require("cors");
 
 const mongoose = require('mongoose')
 const User = require("./Models/User")
-const mongo_url="mongodb+srv://vinitjain:v5ABy6vitC0EKy0j@thepic.u0zzk1w.mongodb.net/"
+const mongo_url="mongodb+srv://dlovej009:Dheeraj2006@cluster0.dnu8vna.mongodb.net/My_node_users?retryWrites=true&w=majority"
 
 
 const UserRoute= require('./Routes/User')

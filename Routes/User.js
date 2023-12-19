@@ -6,67 +6,40 @@ const jwt = require('jsonwebtoken');
 const validator = require("validator");
 
 // User registration route
-router.post('/register', async (req, res) => {
-  const { Name, Email, Password, Role, DeviceID, Skills, Latitude, Longitude, IndustryId, RegistrationId } = req.body;
+router.post('/register',async(req,res)=>{
+  const {
+    name,
+    email,
+    password,
+    deviceID,
+    latitude,
+    longitude,
+    industryId,
+    registrationId
+  } = req.body;
 
-  // Check if required fields are missing
-  if (!Name || !Email || !Password || !DeviceID) {
-    return res.status(400).json({ error: 'Name, Email, Password, and DeviceID are required' });
-  }
 
-  // Validate email
-  // if (!validator.isEmail(Email)) {
-  //   return res.status(400).json({ error: 'Invalid email address' });
-  // }
 
   try {
-    // Check if the email is already registered
-    const existingUser = await User.findOne({ Email });
-    console.log(existingUser)
-    if (existingUser) {
-      return res.status(400).json({ error: 'Email is already registered', user: existingUser });
-    }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(Password, 10);
-
-    // Create a new user instance
     const newUser = new User({
-      Name,
-      Email,
-      Password: hashedPassword,
-      Role,
-      DeviceID,
-      Skills,
-      Latitude,
-      Longitude,
-      IndustryId,
-      RegistrationId,
+      name,
+      email,
+      password,
+      deviceID,
+      latitude,
+      longitude,
+      industryId,
+      registrationId
     });
 
-    // Save the user to the database
     await newUser.save();
-
-    res.status(201).json({ message: 'User registered successfully', user: newUser });
-  } catch (error) {
-    console.error(error);
-
-    // Check if the error is due to validation failure
-    if (error.name === 'ValidationError') {
-      const validationErrors = Object.values(error.errors).map((err) => err.message);
-      return res.status(400).json({ error: 'Validation error', details: validationErrors });
-    }
-
-    if (error.name === 'MongoError' && error.code === 11000) {
-      // Duplicate key error (e.g., duplicate email)
-      return res.status(400).json({ error: 'Duplicate key error', details: 'Email is already registered' });
-    }
-
-    // Generic server error
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
+    res.status(201).json({ message: 'User registered successfully', user:newUser });
+} catch (error) {
+  console.error(error);
+  res.status(500).json({ error: error});
+}
+}
+);
 
 
 
@@ -82,7 +55,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Check if the password is correct
-    const isPasswordValid = await bcrypt.compare(Password, user.Password);
+    const isPasswordValid = await bcrypt.compare(assword, user.Password);
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -112,6 +85,20 @@ router.get('/get-all-by-Role', async (req, res) => {
     // Query the database for users with the specified Role
     const users = await User.find({ Role });
 
+    res.status(200).json({ users });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.get('/:industryId', async (req, res) => {
+  try {
+    const industryId = req.params.industryId;
+
+
+    // Query the database for users with the specified Role
+    const users = await User.find({ industryId });
     res.status(200).json({ users });
   } catch (error) {
     console.error(error);
