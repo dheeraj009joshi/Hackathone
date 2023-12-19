@@ -55,16 +55,16 @@ router.post('/login', async (req, res) => {
     }
 
     // Check if the password is correct
-    const isPasswordValid = await bcrypt.compare(assword, user.Password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
+    // const isPasswordValid = await bcrypt.compare(assword, user.Password);
+    // if (!isPasswordValid) {
+    //   return res.status(401).json({ error: 'Invalid credentials' });
+    // }
 
     // Generate a JSON Web Token (JWT) for authentication
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+    // const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
 
     // Return the token in the response
-    res.status(200).json({ token:token, user:user });
+    res.status(200).json({ message:"Login Successfully", user:user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -95,8 +95,6 @@ router.get('/get-all-by-Role', async (req, res) => {
 router.get('/:industryId', async (req, res) => {
   try {
     const industryId = req.params.industryId;
-
-
     // Query the database for users with the specified Role
     const users = await User.find({ industryId });
     res.status(200).json({ users });
