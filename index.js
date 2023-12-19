@@ -3,14 +3,14 @@ const cors = require("cors");
 
 const mongoose = require('mongoose')
 const User = require("./Models/User")
-const mongo_url="mongodb+srv://dlovej009:Dheeraj2006@cluster0.dnu8vna.mongodb.net/My_node_users?retryWrites=true&w=majority"
+const mongo_url="mongodb+srv://vinitjain:v5ABy6vitC0EKy0j@thepic.u0zzk1w.mongodb.net/"
 
 
 const UserRoutte= require('./Routes/User')
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"*",
     credentials: true,
 }));
 mongoose.connect(mongo_url ,{useNewUrlParser:true})
@@ -21,18 +21,6 @@ con.on('open',()=>{
 })
 
 app.use('/user',UserRoutte)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 app.listen(9000,()=>{

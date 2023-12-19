@@ -1,0 +1,347 @@
+[
+    {
+        "_id": "6548b4593b947f96baf7a948",
+        "UserID": "sampleUserID",
+        "FirstName": "John",
+        "LastName": "Doe",
+        "ProfileImage": "https://example.com/profile.jpg",
+        "CoverImage": "https://example.com/cover.jpg",
+        "Contact": "123-456-7890",
+        "DOB": "1990-01-01",
+        "BusinessName": "Sample Business",
+        "Position": "Manager",
+        "Designation": "Executive",
+        "Website": "https://example.com",
+        "Socials": {
+            "items": [
+                {
+                    "id": "1",
+                    "name": "Instagram",
+                    "socialHandle": "@sample_instagram",
+                    "logo": "https://example.com/instagram-logo.jpg",
+                    "description": "Sample Instagram Profile",
+                    "_id": "6548b4593b947f96baf7a94a"
+                },
+                {
+                    "id": "2",
+                    "name": "LinkedIn",
+                    "socialHandle": "/in/sample_linkedin",
+                    "logo": "https://example.com/linkedin-logo.jpg",
+                    "description": "Sample LinkedIn Profile",
+                    "_id": "6548b4593b947f96baf7a94b"
+                }
+            ],
+            "_id": "6548b4593b947f96baf7a949"
+        },
+        "About": {
+            "GSTIN": "123456789012",
+            "PANNumber": "ABCDE1234F",
+            "AboutText": "About the sample user",
+            "_id": "6548b4593b947f96baf7a94c"
+        },
+        "Location": {
+            "Address": "123 Main St",
+            "ZipCode": "12345",
+            "Latitude": 40.7128,
+            "Longitude": -74.006,
+            "_id": "6548b4593b947f96baf7a94d"
+        },
+        "Gallery": {
+            "IMG1": "https://example.com/img1.jpg",
+            "IMG2": "https://example.com/img2.jpg",
+            "IMG3": "https://example.com/img3.jpg",
+            "IMG4": "https://example.com/img4.jpg",
+            "IMG5": "https://example.com/img5.jpg",
+            "_id": "6548b4593b947f96baf7a94e"
+        },
+        "Payment": {
+            "PayPal": "sample_paypal@example.com",
+            "BankName": "Sample Bank",
+            "AccountHolderName": "John Doe",
+            "AccountNumber": "1234567890",
+            "IFSC": "ABCD1234",
+            "GooglePay": "sample_googlepay@example.com",
+            "PhonePe": "sample_phonepe@example.com",
+            "Paytm": "sample_paytm@example.com",
+            "UPI": "sample_upi@example.com",
+            "_id": "6548b4593b947f96baf7a94f"
+        }
+    },
+    {
+        "_id": "6548dd37b80e127365b12686",
+        "UserID": "123456",
+        "FirstName": "John",
+        "LastName": "Doe",
+        "ProfileImage": "https://example.com/profile.jpg",
+        "CoverImage": "https://example.com/cover.jpg",
+        "Contact": "123-456-7890",
+        "DOB": "1990-01-01",
+        "BusinessName": "Sample Business",
+        "Position": "Manager",
+        "Designation": "Executive",
+        "Website": "https://example.com",
+        "Socials": {
+            "items": [
+                {
+                    "id": "1",
+                    "name": "Instagram",
+                    "socialHandle": "@sample_instagram",
+                    "logo": "https://example.com/instagram-logo.jpg",
+                    "description": "Sample Instagram Profile",
+                    "_id": "6548dd37b80e127365b12688"
+                },
+                {
+                    "id": "2",
+                    "name": "LinkedIn",
+                    "socialHandle": "/in/sample_linkedin",
+                    "logo": "https://example.com/linkedin-logo.jpg",
+                    "description": "Sample LinkedIn Profile",
+                    "_id": "6548dd37b80e127365b12689"
+                }
+            ],
+            "_id": "6548dd37b80e127365b12687"
+        },
+        "About": {
+            "GSTIN": "123456789012",
+            "PANNumber": "ABCDE1234F",
+            "AboutText": "About the sample user",
+            "_id": "6548dd37b80e127365b1268a"
+        },
+        "Location": {
+            "Address": "123 Main St",
+            "ZipCode": "12345",
+            "Latitude": 40.7128,
+            "Longitude": -74.006,
+            "_id": "6548dd37b80e127365b1268b"
+        },
+        "Gallery": {
+            "IMG1": "https://example.com/img1.jpg",
+            "IMG2": "https://example.com/img2.jpg",
+            "IMG3": "https://example.com/img3.jpg",
+            "IMG4": "https://example.com/img4.jpg",
+            "IMG5": "https://example.com/img5.jpg",
+            "_id": "6548dd37b80e127365b1268c"
+        },
+        "Payment": {
+            "PayPal": "sample_paypal@example.com",
+            "BankName": "Sample Bank",
+            "AccountHolderName": "John Doe",
+            "AccountNumber": "1234567890",
+            "IFSC": "ABCD1234",
+            "GooglePay": "sample_googlepay@example.com",
+            "PhonePe": "sample_phonepe@example.com",
+            "Paytm": "sample_paytm@example.com",
+            "UPI": "sample_upi@example.com",
+            "_id": "6548dd37b80e127365b1268d"
+        }
+    },
+    {
+        "_id": "6548de0e678ad7e5cd727fba",
+        "UserID": "123456",
+        "FirstName": "Dheeraj",
+        "LastName": "Joshi",
+        "ProfileImage": "https://smart-card-bixcube.s3.amazonaws.com/Dheeraj_profile_image.jpg",
+        "CoverImage": "https://bixid.s3.amazonaws.com/Dheeraj_cover_image.jpg",
+        "Contact": "123-456-7890",
+        "DOB": "1990-01-01",
+        "BusinessName": "Sample Business",
+        "Position": "Manager",
+        "Designation": "Executive",
+        "Website": "https://example.com",
+        "Socials": {
+            "items": [
+                {
+                    "id": "1",
+                    "name": "Instagram",
+                    "socialHandle": "@sample_instagram",
+                    "logo": "https://example.com/instagram-logo.jpg",
+                    "description": "Sample Instagram Profile",
+                    "_id": "6548de0e678ad7e5cd727fbc"
+                },
+                {
+                    "id": "2",
+                    "name": "LinkedIn",
+                    "socialHandle": "/in/sample_linkedin",
+                    "logo": "https://example.com/linkedin-logo.jpg",
+                    "description": "Sample LinkedIn Profile",
+                    "_id": "6548de0e678ad7e5cd727fbd"
+                }
+            ],
+            "_id": "6548de0e678ad7e5cd727fbb"
+        },
+        "About": {
+            "GSTIN": "123456789012",
+            "PANNumber": "ABCDE1234F",
+            "AboutText": "About the sample user",
+            "_id": "6548de0e678ad7e5cd727fbe"
+        },
+        "Location": {
+            "Address": "123 Main St",
+            "ZipCode": "12345",
+            "Latitude": 40.7128,
+            "Longitude": -74.006,
+            "_id": "6548de0e678ad7e5cd727fbf"
+        },
+        "Gallery": {
+            "IMG1": "https://example.com/img1.jpg",
+            "IMG2": "https://example.com/img2.jpg",
+            "IMG3": "https://example.com/img3.jpg",
+            "IMG4": "https://example.com/img4.jpg",
+            "IMG5": "https://example.com/img5.jpg",
+            "_id": "6548de0e678ad7e5cd727fc0"
+        },
+        "Payment": {
+            "PayPal": "sample_paypal@example.com",
+            "BankName": "Sample Bank",
+            "AccountHolderName": "John Doe",
+            "AccountNumber": "1234567890",
+            "IFSC": "ABCD1234",
+            "GooglePay": "sample_googlepay@example.com",
+            "PhonePe": "sample_phonepe@example.com",
+            "Paytm": "sample_paytm@example.com",
+            "UPI": "sample_upi@example.com",
+            "_id": "6548de0e678ad7e5cd727fc1"
+        }
+    }
+]
+
+
+
+
+
+
+
+
+
+
+//////
+
+{
+    "Cards":[
+     {
+         "CardID": "123456",
+         "FirstName": "John",
+         "LastName": "Doe",
+         "ProfileImage": "https://example.com/profile.jpg",
+         "CoverImage": "https://example.com/cover.jpg",
+         "Contact": "123-456-7890",
+         "DOB": "1990-01-01",
+         "BusinessName": "Sample Business",
+         "Position": "Manager",
+         "Designation": "Executive",
+         "Website": "https://example.com",
+         "Socials": {
+             "items": [
+                 {
+                     "id": "1",
+                     "name": "Instagram",
+                     "socialHandle": "@sample_instagram",
+                     "logo": "https://example.com/instagram-logo.jpg",
+                     "description": "Sample Instagram Profile"
+                 },
+                 {
+                     "id": "2",
+                     "name": "LinkedIn",
+                     "socialHandle": "/in/sample_linkedin",
+                     "logo": "https://example.com/linkedin-logo.jpg",
+                     "description": "Sample LinkedIn Profile"
+                 }
+             ]
+         },
+         "About": {
+             "GSTIN": "123456789012",
+             "PANNumber": "ABCDE1234F",
+             "AboutText": "About the sample user"
+         },
+         "Location": {
+             "Address": "123 Main St",
+             "ZipCode": "12345",
+             "Latitude": 40.7128,
+             "Longitude": -74.006
+         },
+         "Gallery": {
+             "IMG1": "https://example.com/img1.jpg",
+             "IMG2": "https://example.com/img2.jpg",
+             "IMG3": "https://example.com/img3.jpg",
+             "IMG4": "https://example.com/img4.jpg",
+             "IMG5": "https://example.com/img5.jpg"
+         },
+         "Payment": {
+             "PayPal": "sample_paypal@example.com",
+             "BankName": "Sample Bank",
+             "AccountHolderName": "John Doe",
+             "AccountNumber": "1234567890",
+             "IFSC": "ABCD1234",
+             "GooglePay": "sample_googlepay@example.com",
+             "PhonePe": "sample_phonepe@example.com",
+             "Paytm": "sample_paytm@example.com",
+             "UPI": "sample_upi@example.com"
+         }
+     },
+     {
+        
+         "CardID": "123456",
+         "FirstName": "Dheeraj",
+         "LastName": "Joshi",
+         "ProfileImage": "https://smart-card-bixcube.s3.amazonaws.com/Dheeraj_profile_image.jpg",
+         "CoverImage": "https://bixid.s3.amazonaws.com/Dheeraj_cover_image.jpg",
+         "Contact": "123-456-7890",
+         "DOB": "1990-01-01",
+         "BusinessName": "Sample Business",
+         "Position": "Manager",
+         "Designation": "Executive",
+         "Website": "https://example.com",
+         "Socials": {
+             "items": [
+                 {
+                     "id": "1",
+                     "name": "Instagram",
+                     "socialHandle": "@sample_instagram",
+                     "logo": "https://example.com/instagram-logo.jpg",
+                     "description": "Sample Instagram Profile"
+                 },
+                 {
+                     "id": "2",
+                     "name": "LinkedIn",
+                     "socialHandle": "/in/sample_linkedin",
+                     "logo": "https://example.com/linkedin-logo.jpg",
+                     "description": "Sample LinkedIn Profile"
+                 }
+             ]
+            
+         },
+         "About": {
+             "GSTIN": "123456789012",
+             "PANNumber": "ABCDE1234F",
+             "AboutText": "About the sample user"
+         },
+         "Location": {
+             "Address": "123 Main St",
+             "ZipCode": "12345",
+             "Latitude": 40.7128,
+             "Longitude": -74.006
+         },
+         "Gallery": {
+             "IMG1": "https://example.com/img1.jpg",
+             "IMG2": "https://example.com/img2.jpg",
+             "IMG3": "https://example.com/img3.jpg",
+             "IMG4": "https://example.com/img4.jpg",
+             "IMG5": "https://example.com/img5.jpg"
+         },
+         "Payment": {
+             "PayPal": "sample_paypal@example.com",
+             "BankName": "Sample Bank",
+             "AccountHolderName": "John Doe",
+             "AccountNumber": "1234567890",
+             "IFSC": "ABCD1234",
+             "GooglePay": "sample_googlepay@example.com",
+             "PhonePe": "sample_phonepe@example.com",
+             "Paytm": "sample_paytm@example.com",
+             "UPI": "sample_upi@example.com"
+             
+         }
+     }
+ ]
+  
+ }
+ 

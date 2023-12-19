@@ -1,113 +1,88 @@
-const express = require('express')
-const router= express.Router()
-const User = require("../Models/User")
-router.get('/',async(req,res)=>{
-    const U = await User.find()
-    res.json(U)
-})
+const express = require("express");
+const router = express.Router();
+const User = require("../Models/User");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
+// User registration route
+router.post('/register', async (req, res) => {
+  try {
+    // Extract user input from request body
+    const { Name, Email, Password, role, DeviceID, Skills, Latitude, Longitude,IndustryId,RegistrationId } = req.body;
 
-router.post('/register',async(req,res)=>{
-        const {
-        UserID,
-        FirstName,
-        LastName,
-        ProfileImage,
-        CoverImage,
-        Contact,
-        DOB,
-        BusinessName,
-        Position,
-        Designation,
-        Website,
-        Socials,
-        About,
-        Location,
-        Gallery,
-        Payment,
-        Authentication,
-      } = req.body;
-
-      const Username=req.body.Authentication.Username
-      const Password=req.body.Authentication.Password
-      if (await User.findOne({ 'Authentication.Username': Username, 'Authentication.Password': Password  })){
-        const user= await User.findOne({ 'Authentication.Username': Username, 'Authentication.Password': Password  })
-        res.json({
-          "Message":"User Already Exist",
-          "Details":user
-        })
-      } else{
-      
-      try {
-        const newUser = new User({
-          UserID,
-          FirstName,
-          LastName,
-          ProfileImage,
-          CoverImage,
-          Contact,
-          DOB,
-          BusinessName,
-          Position,
-          Designation,
-          Website,
-          Socials,
-          About,
-          Location,
-          Gallery,
-          Payment,
-          Authentication,
-        });
-
-        await newUser.save();
-        res.status(201).json({ message: 'User registered successfully' });
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
-      }
+    // Check if the email is already registered
+    const existingUser = await User.findOne({ Email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email is already registered' , user :existingUser });
     }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(Password, 10);
+
+    // Create a new user instance
+    const newUser = new User({
+      Name,
+      Email,
+      Password: hashedPassword,
+      role,
+      DeviceID,
+      Skills,
+      Latitude,
+      Longitude,
+      RegistrationId,
+      IndustryId
     });
-            
 
+    // Save the user to the database
+    await newUser.save();
 
-router.get('/:id',async(req,res)=>{
-    const U = await User.findById(req.params.id)
-    res.json(U)
-});
+    res.status(201).json({ message: 'User registered successfully' , user: newUser});
+  } catch (error) {
+    console.error(error);
 
+    if (error.name === 'ValidationError') {
+      // Mongoose validation error
+      const validationErrors = Object.values(error.errors).map((err) => err.message);
+      return res.status(400).json({ error: 'Validation error', details: validationErrors });
+    }
 
-router.patch('/update/:id', async(req,res)=>{
-    // const U = await User.findById(req.params.id)
-    try {
-    const updated_fields = req.body
-    console.log(updated_fields , req.params.id)
-    const update = await User.findByIdAndUpdate(req.params.id, updated_fields,{new:true})
-    if (update) {
-        res.send(update);
-    } else {
-        res.status(404).json({ error: 'User not found' });
-    } 
-} catch (error) {
-    console.log(error)
-}
+    if (error.name === 'MongoError' && error.code === 11000) {
+      // Duplicate key error (e.g., duplicate email)
+      return res.status(400).json({ error: 'Duplicate key error', details: 'Email is already registered' });
+    }
+
+    // Generic server error
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 
 router.post('/login', async (req, res) => {
-    const { Username, Password } = req.body;
-    console.log(Username, Password)
-    try {
-      const user = await User.findOne({ 'Authentication.Username': Username, 'Authentication.Password': Password  });
-        console.log(user)
-      if (!user) {
-        return res.status(401).json({ error: 'Invalid credentials' });
-      }
-  
-      res.status(200).json({ "message": "Login successful" ,"status": 200,"User_details":user});
-    } catch (error) {
-        // res.send("error falios")
-      res.status(500).json({ error: 'Internal server error' });
+  try {
+    // Extract user input from request body
+    const { Email, Password } = req.body;
+
+    // Check if the email is registered
+    const user = await User.findOne({ Email });
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
-  });
-  
-module.exports = router
+
+    // Check if the password is correct
+    const isPasswordValid = await bcrypt.compare(Password, user.Password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Generate a JSON Web Token (JWT) for authentication
+    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+
+    // Return the token in the response
+    res.status(200).json({ token:token, user:user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+module.exports = router;
