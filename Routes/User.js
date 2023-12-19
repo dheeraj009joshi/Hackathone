@@ -7,14 +7,24 @@ const validator = require("validator");
 
 // User registration route
 router.post('/register', async (req, res) => {
-  try {
-    // Extract user input from request body
-    const { Name, Email, Password, Role, DeviceID, Skills, Latitude, Longitude,IndustryId,RegistrationId } = req.body;
+  const { Name, Email, Password, Role, DeviceID, Skills, Latitude, Longitude, IndustryId, RegistrationId } = req.body;
 
+  // Check if required fields are missing
+  if (!Name || !Email || !Password || !DeviceID) {
+    return res.status(400).json({ error: 'Name, Email, Password, and DeviceID are required' });
+  }
+
+  // Validate email
+  // if (!validator.isEmail(Email)) {
+  //   return res.status(400).json({ error: 'Invalid email address' });
+  // }
+
+  try {
     // Check if the email is already registered
     const existingUser = await User.findOne({ Email });
+    console.log(existingUser)
     if (existingUser) {
-      return res.status(400).json({ error: 'Email is already registered' , user :existingUser });
+      return res.status(400).json({ error: 'Email is already registered', user: existingUser });
     }
 
     // Hash the password
@@ -30,19 +40,19 @@ router.post('/register', async (req, res) => {
       Skills,
       Latitude,
       Longitude,
+      IndustryId,
       RegistrationId,
-      IndustryId
     });
 
     // Save the user to the database
     await newUser.save();
 
-    res.status(201).json({ message: 'User registered successfully' , user: newUser});
+    res.status(201).json({ message: 'User registered successfully', user: newUser });
   } catch (error) {
     console.error(error);
 
+    // Check if the error is due to validation failure
     if (error.name === 'ValidationError') {
-      // Mongoose validation error
       const validationErrors = Object.values(error.errors).map((err) => err.message);
       return res.status(400).json({ error: 'Validation error', details: validationErrors });
     }
@@ -56,6 +66,8 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
 
 
 router.post('/login', async (req, res) => {
