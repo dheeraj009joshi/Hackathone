@@ -28,6 +28,7 @@ const userSchema = new Schema({
   latitude: String,
   longitude: String,
   industryId: String,
+  phoneNumber: String,
   registrationId:String,
   gender:{
     type:String,
