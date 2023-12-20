@@ -182,21 +182,53 @@ transporter.sendMail(mailOptions, (error, info) => {
 });
 
 
- 
+
+async function sendInputData() {
+  const flaskServerUrl = 'http://127.0.0.1:5000';  // Change this URL to match your Flask server
+
+  const inputData = {
+    gas_weight: 1.23,
+    density: 0.8,
+    amount: 100,
+    wind_speed: 5.6,
+    atmospheric_pressure: 1013,
+    impurities: 0.05
+    // Add other properties as needed
+  };
+
+  try {
+    const response = await axios.post(`${flaskServerUrl}/predict`, inputData);
+    console.log('Response from Flask server:', response.data);
+    // You can handle the response or return it as needed
+    return response.data;
+  } catch (error) {
+    console.error('Error communicating with Flask server:', error.message);
+    // You can handle the error or throw it as needed
+    throw error;
+  }
+}
+
+// Call the function
+
+
+
+
   const number_points = 17;
   const coordinates2km = [];
   const coordinates3km = [];
+  const radius=await sendInputData();
+  console.log(radius)
   for (let i = 0; i < number_points; i++) {
     const angle = (i / number_points) * 2 * Math.PI;
 
     // Calculate coordinates for a circle with a radius of 2 km
-    const lat2km = centerLat + (2 / 111) * Math.cos(angle);
-    const lng2km = centerLng + (2 / 111) * Math.sin(angle);
+    const lat2km = centerLat + (radius / 111) * Math.cos(angle);
+    const lng2km = centerLng + (radius / 111) * Math.sin(angle);
     coordinates2km.push({ latitude: lat2km, longitude: lng2km });
 
     // Calculate coordinates for a circle with a radius of 3 km
-    const lat3km = centerLat + (3 / 111) * Math.cos(angle);
-    const lng3km = centerLng + (3 / 111) * Math.sin(angle);
+    const lat3km = centerLat + (radius+3 / 111) * Math.cos(angle);
+    const lng3km = centerLng + (radius+3 / 111) * Math.sin(angle);
     coordinates3km.push({ latitude: lat3km, longitude: lng3km });
   }
 
