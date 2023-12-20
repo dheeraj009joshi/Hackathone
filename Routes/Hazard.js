@@ -97,7 +97,7 @@ const transporter = nodemailer.createTransport({
 const mailOptions = {
   from: 'Dheeraj@bixid.in',
   to:  emails.join(', '),
-  subject: `${hazard_title} at ${address}`,
+  subject: `${hazard_title} hazard at ${address}`,
  
 html: `<html lang="en">
 <head>
