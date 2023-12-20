@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const User = require("../Models/User");
 const axios = require('axios');
 const nodemailer = require('nodemailer');
 // User registration route
@@ -47,17 +48,18 @@ router.post("/", async (req, res) => {
         "Do: Ventilate the area if safe to do so.\nDon't: Use open flames or switches in the presence of a suspected gas leak.",
     },
   };
-  const { centerLat, centerLng, hazard_title } = req.body;
-  // const latitude = 37.7749;
-  // const longitude = -122.4194;
+  const { centerLat, centerLng, hazard_title, industryId } = req.body;
+  const users = await User.find({ industryId });
+    // Extract and store emails
+  const emails = users.map(user => user.email);
   
+  console.log(emails)
   
-  
-  const recipients= [
-    'dlovej009@gmail.com',
-    'amitauniyal47@gmail.com',
-    'dlovej142@gmail.com',
-  ]
+  // const emails= [
+    
+  //   'amitauniyal47@gmail.com',
+  //   'dlovej142@gmail.com',
+  // ]
   const mapUrl = `https://www.google.com/maps/search/?api=1&query=${centerLat},${centerLat}`;
 
   async function getGeocodeInfo(latitude, longitude) {
@@ -94,7 +96,7 @@ const transporter = nodemailer.createTransport({
 // Email content
 const mailOptions = {
   from: 'Dheeraj@bixid.in',
-  to:  recipients.join(', '),
+  to:  emails.join(', '),
   subject: `${hazard_title} at ${address}`,
  
 html: `<html lang="en">
