@@ -7,7 +7,7 @@ const mongo_url="mongodb+srv://dlovej009:Dheeraj2006@cluster0.dnu8vna.mongodb.ne
 
 
 const UserRoute= require('./Routes/User')
-const SafeAreaRoute= require('./Routes/SafeArea')
+const HazardRoute= require('./Routes/Hazard')
 const NotificationRoute= require('./Routes/Notification')
 const app = express()
 app.use(express.json())
@@ -24,6 +24,7 @@ con.on('open',()=>{
 
 app.use('/user',UserRoute)
 app.use('/notification',NotificationRoute)
+app.use('/hazard',HazardRoute)
 
 
 app.listen(9000,()=>{
