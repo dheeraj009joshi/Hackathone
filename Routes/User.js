@@ -42,34 +42,49 @@ router.post('/register',async(req,res)=>{
 );
 
 
-
 router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  console.log(email, password)
   try {
-    // Extract user input from request body
-    const { Email, Password } = req.body;
-
-    // Check if the email is registered
-    const user = await User.findOne({ Email });
+    const user = await User.findOne({ 'email': email, 'password': password  });
+      console.log(user)
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Check if the password is correct
-    // const isPasswordValid = await bcrypt.compare(assword, user.Password);
-    // if (!isPasswordValid) {
-    //   return res.status(401).json({ error: 'Invalid credentials' });
-    // }
-
-    // Generate a JSON Web Token (JWT) for authentication
-    // const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
-
-    // Return the token in the response
-    res.status(200).json({ message:"Login Successfully", user:user });
+    res.status(200).json({ "message": "Login successful" ,"user":user});
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+      // res.send("error falios")
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
+// router.post('/login', async (req, res) => {
+//   try {
+//     // Extract user input from request body
+//     const { Email, Password } = req.body;
+
+//     // Check if the email is registered
+//     const user = await User.findOne({  });
+//     if (!user) {
+//       return res.status(401).json({ error: 'Invalid credentials' });
+//     }
+
+//     // Check if the password is correct
+//     // const isPasswordValid = await bcrypt.compare(assword, user.Password);
+//     // if (!isPasswordValid) {
+//     //   return res.status(401).json({ error: 'Invalid credentials' });
+//     // }
+
+//     // Generate a JSON Web Token (JWT) for authentication
+//     // const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+
+//     // Return the token in the response
+//     res.status(200).json({ message:"Login Successfully", user:user });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 
 router.get('/get-all-by-Role', async (req, res) => {
   try {
